@@ -3,6 +3,7 @@ import taskElement from './temp.js';
 
 const elementContainer = document.querySelector('.list-box');
 const displayElements = () => {
+  elementContainer.innerHTML = ``;
   tasksList.forEach((task) => {
     elementContainer.appendChild(taskElement(task));
   });
