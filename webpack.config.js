@@ -10,9 +10,6 @@ module.exports = {
     clean: true,
   },
   devServer: {
-    headers: {
-      'Content-Type': 'text/css',
-    },
     static: './dist',
   },
   module: {
