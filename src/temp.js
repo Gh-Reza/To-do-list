@@ -11,6 +11,6 @@ const taskElement = (data) => {
     </div>
   `;
   return listElement;
-}
+};
 
 export default taskElement;
