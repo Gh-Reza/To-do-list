@@ -10,12 +10,15 @@ module.exports = {
     clean: true,
   },
   devServer: {
+    headers: {
+      'Content-Type': 'text/css',
+    },
     static: './dist',
   },
   module: {
     rules: [
       {
-        test: /\.css$/i,
+        test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       }
     ]

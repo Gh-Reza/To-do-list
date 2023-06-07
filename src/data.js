@@ -1,4 +1,4 @@
-const tasks = [
+const tasksList = [
   {
     description: 'Go to shopping',
     completed: false,
@@ -16,4 +16,4 @@ const tasks = [
   },
 ];
 
-export default tasks;
+export default tasksList;
