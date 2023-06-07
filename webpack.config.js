@@ -9,6 +9,9 @@ module.exports = {
     filename: '[name].js',
     clean: true,
   },
+  devServer: {
+    static: './dist',
+  },
   module: {
     rules: [
       {
@@ -22,4 +25,7 @@ module.exports = {
       template: './src/index.html',
     }
   )],
+  optimization: {
+    runtimeChunk: 'single',
+  },
 }

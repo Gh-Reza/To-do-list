@@ -5,32 +5,42 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My to do list</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 <script defer src="bundle.js"></script></head>
 <body>
-  <!-- Header section -->
-  <header class="section-header">
-    <div class="title">To Do</div>
-    <div class="refresh-box">
-      🔃
-    </div>
-  </header>
-  <!-- main section -->
-  <main class="section-main">
-    <div class="input-box">
-      <input type="text" placeholder="Add to your list...">
-    </div>
-    <ul class="list">
-      <li class="list-item">
-        <div class="group">
-          <input type="checkbox" name="task" id="">
-          <p class="task-description">Go to shopping</p>
-        </div>
-        <div class="move-icon-box">
-          Move
-        </div>
-      </li>
-    </ul>
-  </main>
+  <div class="container">
+    <!-- Header section -->
+    <header class="section-header">
+      <div class="title">To Do</div>
+      <div class="refresh-box">
+        <a href="#"><ion-icon class="icon" name="refresh"></ion-icon></a>
+      </div>
+    </header>
+    <!-- main section -->
+    <main class="section-main">
+      <div class="input-box">
+        <input class="addInput" type="text" placeholder="Add to your list...">
+        <div class="icon-box"><a href="#"><ion-icon class="icon--small icon" name="return-left"></ion-icon></div></a>
+      </div>
+      <ul class="list-box">
+        <li class="list-item">
+          <div class="group">
+            <input type="checkbox" name="task" id="">
+            <label for="task">Go to shopping</label>
+          </div>
+          <div class="move-icon-box">
+            <ion-icon class="icon move-icon" name="more"></ion-icon>
+          </div>
+        </li>
+      </ul>
+      <div class="removeBtnContainer">
+        <a class="removeBtn" href="#">Clear all completed</a>
+      </div>
+    </main>
+  </div>
+  <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 </body>
 </html>
