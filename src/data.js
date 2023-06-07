@@ -5,12 +5,12 @@ const tasksList = [
     index: 0,
   },
   {
-    description: 'Go to hill',
+    description: 'Clean the house',
     completed: false,
     index: 1,
   },
   {
-    description: 'Go to Pakistan',
+    description: 'Make dinner',
     completed: false,
     index: 2,
   },
