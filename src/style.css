@@ -10,6 +10,7 @@ body {
   font-family: 'Inter', sans-serif;
   font-size: 1.6rem;
   color: #5f5f5f;
+  padding: 1.2rem;
 }
 
 html {
@@ -17,7 +18,7 @@ html {
 }
 
 .container {
-  width: 40rem;
+  max-width: 40rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.379);
   margin: 9rem auto;
   background-color: #f0f0f0;
@@ -35,6 +36,7 @@ html {
 .icon {
   font-size: 2.4rem;
   color: #7d7d7d;
+  cursor: pointer;
 }
 
 .icon--small {
@@ -59,12 +61,29 @@ html {
 
 .list-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 1.2rem;
-  border-bottom: 1px solid #ddd;
   background-color: #fff;
+  padding: 0 1.2rem;
   margin: 2px;
+  border-bottom: 1px solid #ddd;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input {
+  padding: 1.2rem 7px;
+  border: none;
+  outline: none;
+  width: 100%;
+  cursor: default;
+}
+
+.move-icon-box {
+  flex-shrink: 0;
 }
 
 .move-icon {
@@ -81,4 +100,8 @@ html {
   font-weight: 500;
   display: block;
   text-align: center;
+}
+
+.transform-input {
+  transform: scale(1.02);
 }

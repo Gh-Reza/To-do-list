@@ -1,18 +1,36 @@
-import tasksList from "./data.js";
+import tasksList from './data.js';
 
 const updateLocalStorage = () => {
   localStorage.setItem('todotask', JSON.stringify(tasksList));
-}
+};
 
-const tastManager = {
+const taskManager = {
   addTask: (description) => {
     tasksList.push({
-      description: description,
+      description,
       completed: false,
-      index: tasksList.length + 1
-    })
+      index: tasksList.length + 1,
+    });
     updateLocalStorage();
   },
-}
 
-export default tastManager;
+  removeTask: (index) => {
+    tasksList.splice(index, 1);
+
+    for (let i = index; i < tasksList.length; i++) {
+      tasksList[i].index = i + 1;
+    }
+    updateLocalStorage();
+  },
+
+  updateTask: (newValue, index) => {
+    tasksList[index] = {
+      description: newValue,
+      completed: tasksList[index].completed,
+      index: tasksList[index].index,
+    },
+    updateLocalStorage();
+  },
+};
+
+export default taskManager;
