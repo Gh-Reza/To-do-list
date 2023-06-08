@@ -17,7 +17,7 @@ const taskManager = {
   removeTask: (index) => {
     tasksList.splice(index, 1);
 
-    for (let i = index; i < tasksList.length; i++) {
+    for (let i = index; i < tasksList.length; i += 1) {
       tasksList[i].index = i + 1;
     }
     updateLocalStorage();
@@ -28,7 +28,7 @@ const taskManager = {
       description: newValue,
       completed: tasksList[index].completed,
       index: tasksList[index].index,
-    },
+    };
     updateLocalStorage();
   },
 };

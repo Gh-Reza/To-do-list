@@ -1,8 +1,9 @@
 import './style.css';
-import displayElements from './display.js';
+import DisplayElements from './display.js';
 import taskManager from './taskManager.js';
 
-displayElements();
+const ob = new DisplayElements();
+ob.displayElements();
 
 // * Add functionality
 
@@ -12,7 +13,7 @@ inputElement.addEventListener('keydown', (e) => {
   if ((e.keyCode !== 13 || e.key !== 'Enter') || inputElement.value === '') return;
   taskManager.addTask(inputElement.value);
   inputElement.value = '';
-  displayElements();
+  ob.displayElements();
 });
 
 const enterIconElement = document.querySelector('.enter-icon');
@@ -20,6 +21,6 @@ const enterIconElement = document.querySelector('.enter-icon');
 enterIconElement.addEventListener('click', () => {
   if (inputElement.value === '') { return; }
   taskManager.addTask(inputElement.value);
-  displayElements();
+  ob.displayElements();
   inputElement.value = '';
 });
