@@ -1,6 +1,8 @@
 import './style.css';
 import DisplayElements from './display.js';
 import taskManager from './taskManager.js';
+import tasksList from './data.js';
+import updateLocalStorage from './localStorage.js';
 
 const ob = new DisplayElements();
 ob.displayElements();
@@ -23,4 +25,30 @@ enterIconElement.addEventListener('click', () => {
   taskManager.addTask(inputElement.value);
   ob.displayElements();
   inputElement.value = '';
+});
+
+// * Check tasks status
+
+const checkboxElement = document.querySelectorAll('.checkboxInput');
+
+tasksList.forEach((element, index) => {
+  if (element.completed) checkboxElement[index].checked = true;
+});
+
+// * Delete all checkec
+
+const clearChecked = document.querySelector('.removeBtn');
+
+clearChecked.addEventListener('click', () => {
+  const temArr = tasksList.filter((task) => !task.completed);
+  tasksList.splice(0);
+  temArr.forEach((elem) => {
+    tasksList.push(elem);
+  });
+
+  for (let i = 0; i < tasksList.length; i += 1) {
+    tasksList[i].index = i + 1;
+  }
+  updateLocalStorage();
+  ob.displayElements();
 });

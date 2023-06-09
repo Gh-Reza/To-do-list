@@ -1,8 +1,5 @@
 import tasksList from './data.js';
-
-const updateLocalStorage = () => {
-  localStorage.setItem('todotask', JSON.stringify(tasksList));
-};
+import updateLocalStorage from './localStorage.js';
 
 const taskManager = {
   addTask: (description) => {
