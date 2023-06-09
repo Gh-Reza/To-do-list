@@ -1,5 +1,5 @@
 import tasksList from './data.js';
-import { updateStatus } from './status.js';
+import updateStatus from './status.js';
 import taskManager from './taskManager.js';
 
 class DisplayElements {
@@ -8,9 +8,9 @@ class DisplayElements {
   }
 
   displayTasks = (data, index) => {
-    this.listElement = document.createElement('li');
-    this.listElement.className = 'list-item';
-    this.listElement.innerHTML = `
+    const listElement = document.createElement('li');
+    listElement.className = 'list-item';
+    listElement.innerHTML = `
       <div class="input-group">
         <input type="checkbox" class="checkboxInput" name="task" id="">
         <input type="text" class="input" value="${data.description}">
@@ -23,7 +23,7 @@ class DisplayElements {
 
     // * Hundle remove task click
 
-    const removeBtn = this.listElement.querySelector('.remove-icon');
+    const removeBtn = listElement.querySelector('.remove-icon');
 
     removeBtn.addEventListener('click', () => {
       taskManager.removeTask(index);
@@ -32,26 +32,30 @@ class DisplayElements {
 
     // * Hundle task list onfocus event
 
-    const taskInputElement = this.listElement.querySelector('.input');
+    const taskInputElement = listElement.querySelector('.input');
     taskInputElement.addEventListener('focusin', () => {
-      this.listElement.classList.add('transform-input');
+      listElement.classList.add('transform-input');
     });
 
     // * Hundle task list focus lost event
 
     taskInputElement.addEventListener('blur', () => {
-      this.listElement.classList.remove('transform-input');
+      if (taskInputElement.value === '') {
+        this.displayElements();
+        return;
+      }
+      listElement.classList.remove('transform-input');
       taskManager.updateTask(taskInputElement.value, index);
       this.displayElements();
     });
 
-    const checkboxElement = this.listElement.querySelector('.checkboxInput');
+    const checkboxElement = listElement.querySelector('.checkboxInput');
 
     checkboxElement.addEventListener('change', () => {
       updateStatus(index, checkboxElement.checked);
     });
 
-    return this.listElement;
+    return listElement;
   }
 
   displayElements = () => {
@@ -59,6 +63,13 @@ class DisplayElements {
     elementContainer.innerHTML = '';
     tasksList.forEach((task, index) => {
       elementContainer.appendChild(this.displayTasks(task, index));
+    });
+    // * Check tasks status
+
+    const checkboxElement = document.querySelectorAll('.checkboxInput');
+
+    tasksList.forEach((element, index) => {
+      if (element.completed) checkboxElement[index].checked = true;
     });
   }
 }

@@ -27,14 +27,6 @@ enterIconElement.addEventListener('click', () => {
   inputElement.value = '';
 });
 
-// * Check tasks status
-
-const checkboxElement = document.querySelectorAll('.checkboxInput');
-
-tasksList.forEach((element, index) => {
-  if (element.completed) checkboxElement[index].checked = true;
-});
-
 // * Delete all checkec
 
 const clearChecked = document.querySelector('.removeBtn');

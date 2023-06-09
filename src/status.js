@@ -10,6 +10,4 @@ const updateStatus = (index, status) => {
   updateLocalStorage();
 };
 
-const checkStatus = (index) => tasksList[index].completed === true;
-
-export { updateStatus, checkStatus };
+export default updateStatus;
