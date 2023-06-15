@@ -1,33 +1,29 @@
 import './style.css';
 import DisplayElements from './display.js';
 import taskManager from './taskManager.js';
+import tasksList from './data.js';
+import updateLocalStorage from './localStorage.js';
 
 const ob = new DisplayElements();
-
-document.addEventListener('DOMContentLoaded', () => {
-  const tasksList = JSON.parse(localStorage.getItem('todotask')) || [];
-  ob.displayElements(tasksList);
-});
+ob.displayElements();
 
 // * Add functionality
 
 const inputElement = document.querySelector('.addInput');
 
 inputElement.addEventListener('keydown', (e) => {
-  const tasksList = JSON.parse(localStorage.getItem('todotask')) || [];
   if ((e.keyCode !== 13 || e.key !== 'Enter') || inputElement.value === '') return;
-  taskManager.addTask(inputElement.value, tasksList);
+  taskManager.addTask(inputElement.value);
   inputElement.value = '';
-  ob.displayElements(tasksList);
+  ob.displayElements();
 });
 
 const enterIconElement = document.querySelector('.enter-icon');
 
 enterIconElement.addEventListener('click', () => {
-  const tasksList = JSON.parse(localStorage.getItem('todotask')) || [];
   if (inputElement.value === '') { return; }
-  taskManager.addTask(inputElement.value, tasksList);
-  ob.displayElements(tasksList);
+  taskManager.addTask(inputElement.value);
+  ob.displayElements();
   inputElement.value = '';
 });
 
@@ -36,7 +32,15 @@ enterIconElement.addEventListener('click', () => {
 const clearChecked = document.querySelector('.removeBtn');
 
 clearChecked.addEventListener('click', () => {
-  const tasksList = JSON.parse(localStorage.getItem('todotask')) || [];
-  taskManager.clearCompleted(tasksList);
-  ob.displayElements(tasksList);
+  const temArr = tasksList.filter((task) => !task.completed);
+  tasksList.splice(0);
+  temArr.forEach((elem) => {
+    tasksList.push(elem);
+  });
+
+  for (let i = 0; i < tasksList.length; i += 1) {
+    tasksList[i].index = i + 1;
+  }
+  updateLocalStorage();
+  ob.displayElements();
 });

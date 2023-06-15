@@ -1,3 +1,4 @@
+import tasksList from './data.js';
 import updateStatus from './status.js';
 import taskManager from './taskManager.js';
 
@@ -25,9 +26,8 @@ class DisplayElements {
     const removeBtn = listElement.querySelector('.remove-icon');
 
     removeBtn.addEventListener('click', () => {
-      const tasksList = JSON.parse(localStorage.getItem('todotask')) || [];
-      taskManager.removeTask(index, tasksList);
-      this.displayElements(tasksList);
+      taskManager.removeTask(index);
+      this.displayElements();
     });
 
     // * Hundle task list onfocus event
@@ -40,26 +40,25 @@ class DisplayElements {
     // * Hundle task list focus lost event
 
     taskInputElement.addEventListener('blur', () => {
-      const tasksList = JSON.parse(localStorage.getItem('todotask')) || [];
       if (taskInputElement.value === '') {
-        this.displayElements(tasksList);
+        this.displayElements();
         return;
       }
       listElement.classList.remove('transform-input');
-      taskManager.updateTask(taskInputElement.value, index, tasksList);
+      taskManager.updateTask(taskInputElement.value, index);
+      this.displayElements();
     });
 
     const checkboxElement = listElement.querySelector('.checkboxInput');
 
     checkboxElement.addEventListener('change', () => {
-      const tasksList = JSON.parse(localStorage.getItem('todotask')) || [];
-      updateStatus(index, checkboxElement.checked, tasksList);
+      updateStatus(index, checkboxElement.checked);
     });
 
     return listElement;
   }
 
-  displayElements = (tasksList) => {
+  displayElements = () => {
     const elementContainer = document.querySelector('.list-box');
     elementContainer.innerHTML = '';
     tasksList.forEach((task, index) => {
