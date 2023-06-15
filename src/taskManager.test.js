@@ -1,5 +1,6 @@
 import updateLocalStorage from './localStorage.js';
 import taskManager from './taskManager.js';
+import updateStatus from './status.js';
 
 jest.mock('./localStorage.js', () => jest.fn().mockImplementation(() => {}));
 
@@ -52,6 +53,52 @@ describe('Remove task', () => {
         description: 'task 3',
         completed: false,
         index: 2,
+      },
+    ]);
+
+    expect(updateLocalStorage).toHaveBeenCalledWith(tasksList);
+  });
+});
+
+describe('Edit task', () => {
+  test('One or more tasks should be edited', () => {
+    const tasksList = [
+      {
+        description: 'Added',
+        completed: false,
+        index: 1,
+      },
+      {
+        description: 'Another',
+        completed: false,
+        index: 2,
+      },
+      {
+        description: 'One more',
+        completed: false,
+        index: 3,
+      },
+    ];
+
+    taskManager.updateTask('Another one', 1, tasksList);
+    taskManager.updateTask('Added edited', 0, tasksList);
+    taskManager.updateTask('Delete the value', 2, tasksList);
+
+    expect(tasksList).toEqual([
+      {
+        description: 'Added edited',
+        completed: false,
+        index: 1,
+      },
+      {
+        description: 'Another one',
+        completed: false,
+        index: 2,
+      },
+      {
+        description: 'Delete the value',
+        completed: false,
+        index: 3,
       },
     ]);
 
