@@ -105,3 +105,80 @@ describe('Edit task', () => {
     expect(updateLocalStorage).toHaveBeenCalledWith(tasksList);
   });
 });
+
+describe('Update Status', () => {
+  test('Status should be updated', () => {
+    const tasksList = [
+      {
+        description: 'Added',
+        completed: false,
+        index: 1,
+      },
+      {
+        description: 'Another',
+        completed: false,
+        index: 2,
+      },
+      {
+        description: 'One more',
+        completed: false,
+        index: 3,
+      },
+    ];
+
+    updateStatus(0, true, tasksList);
+    updateStatus(1, true, tasksList);
+
+    expect(tasksList).toEqual([
+      {
+        description: 'Added',
+        completed: true,
+        index: 1,
+      },
+      {
+        description: 'Another',
+        completed: true,
+        index: 2,
+      },
+      {
+        description: 'One more',
+        completed: false,
+        index: 3,
+      },
+    ]);
+    expect(updateLocalStorage).toHaveBeenCalledWith(tasksList);
+  });
+});
+
+describe('Clear completed tasks', () => {
+  test('The completed tasks should be eliminated', () => {
+    const tasksList = [
+      {
+        description: 'Added edited',
+        completed: true,
+        index: 1,
+      },
+      {
+        description: 'Another one',
+        completed: false,
+        index: 2,
+      },
+      {
+        description: 'Delete the value',
+        completed: true,
+        index: 3,
+      },
+    ];
+
+    taskManager.clearCompleted(tasksList);
+
+    expect(tasksList).toEqual([
+      {
+        description: 'Another one',
+        completed: false,
+        index: 1,
+      },
+    ]);
+    expect(updateLocalStorage).toHaveBeenCalledWith(tasksList);
+  });
+});
